@@ -2,7 +2,7 @@
 
 A suite of benchmarks designed to test and compare Rust ECS library performance across a variety of challenging circumstances.
 
-The full benchmark report is available [here](https://tomgillen.github.io/ecs_bench_suite/target/criterion/report/index.html)
+The full benchmark report is available [here](https://tomgillen.github.io/ecs_bench_suite/target/criterion/report/index.html).
 
 |                  | legion      | legion 0.2.4 | bevy     | shipyard   |
 |------------------|:-----------:|:------------:|:--------:|:----------:|
@@ -41,7 +41,7 @@ Test: Iterate through all entities with a `Data` component and double its value.
 
 ### System Scheduling
 
-This benchmark is designed to test how efficiently the ECS can schedule multiple independent systems on a multi-core CPU. Each system should execute on a single CPU core.
+This benchmark is designed to test how efficiently the ECS can schedule multiple independent systems on a multi-core CPU. This is primarily an outer-parallelism test. Each system should execute on a single CPU core.
 
 Dataset:
 
@@ -60,7 +60,7 @@ Three systems accessing the following components mutably, where each system swap
 
 ### Heavy Compute
 
-This benchmark is designed to test the ECS's ability to scale when it is allowed to run a system over multiple CPU cores.
+This benchmark is designed to test the ECS's ability to scale when it is allowed to run a system over multiple CPU cores. This is primarily an inner-parallelism test.
 
 Dataset: 10,000 entities with a `mat4x4` component.
 
