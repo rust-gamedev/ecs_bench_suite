@@ -2,16 +2,18 @@
 
 A suite of benchmarks designed to test and compare Rust ECS library performance across a variety of challenging circumstances.
 
-|                  | legion       | legion 0.2.4 | bevy     | shipyard     |
-|------------------|:------------:|:------------:|:--------:|:------------:|
-| simple_insert    | **402.75us** | 991.19us     | 877.92us | 2.6247ms     |
-| simple_iter      | **13.415us** | 13.450us     | 14.105us | 85.951us     |
-| frag_iter        | **509.34ns** | 1.8038us     | 1.3399us | 1.0526us     |
-| heavy_compute    | **719.92us** | 4.3426ms     | 4.6295ms | 726.73us     |
-| schedule         | **53.540us** | 135.02us     | 95.379us | 466.75us     |
-| add_remove       | 5.5488ms     | 3.0843ms     | -        | **2.9093ms** |
-| serialize_text   | **16.911ms** | -            | -        |              |
-| serialize_binary | **6.5898ms** | -            | -        |              |
+The full benchmark report is available [here](https://tomgillen.github.io/ecs_bench_suite/target/criterion/report/index.html)
+
+|                  | legion      | legion 0.2.4 | bevy     | shipyard   |
+|------------------|:-----------:|:------------:|:--------:|:----------:|
+| simple_insert    | **0.403ms** | 0.991ms      | 0.878ms  | 2.6247ms   |
+| simple_iter      | **13.4us**  | 13.5us       | 14.1us   | 86.0us     |
+| frag_iter        | **0.509us** | 1.80us       | 1.34us   | 1.05us     |
+| heavy_compute    | **0.720ms** | 4.3426ms     | 4.6295ms | 0.727ms    |
+| schedule         | **53.5us**  | 135us        | 95.4us   | 467us      |
+| add_remove       | 5.55ms      | 3.08ms       | -        | **2.91ms** |
+| serialize_text   | **16.9ms**  | -            | -        |            |
+| serialize_binary | **6.59ms**  | -            | -        |            |
 
 ## The Benchmarks
 
