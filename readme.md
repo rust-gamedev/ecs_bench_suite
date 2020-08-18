@@ -2,6 +2,17 @@
 
 A suite of benchmarks designed to test and compare Rust ECS library performance across a variety of challenging circumstances.
 
+|                  | legion       | legion 0.2.4 | bevy     | shipyard     |
+|------------------|:------------:|:------------:|:--------:|:------------:|
+| simple_insert    | **402.75us** | 991.19us     | 877.92us | 2.6247ms     |
+| simple_iter      | **13.415us** | 13.450us     | 14.105us | 85.951us     |
+| frag_iter        | **509.34ns** | 1.8038us     | 1.3399us | 1.0526us     |
+| heavy_compute    | **719.92us** | 4.3426ms     | 4.6295ms | 726.73us     |
+| schedule         | **53.540us** | 135.02us     | 95.379us | 466.75us     |
+| add_remove       | 5.5488ms     | 3.0843ms     | -        | **2.9093ms** |
+| serialize_text   | **16.911ms** | -            | -        |              |
+| serialize_binary | **6.5898ms** | -            | -        |              |
+
 ## The Benchmarks
 
 ### Simple Insert
