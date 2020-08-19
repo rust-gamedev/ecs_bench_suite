@@ -1,45 +1,55 @@
 use cgmath::*;
-use legion::*;
-use query::Query;
-use storage::PackOptions;
+use specs::prelude::*;
+use specs_derive::*;
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Component)]
+#[storage(VecStorage)]
 struct Transform(Matrix4<f32>);
-
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Component)]
+#[storage(VecStorage)]
 struct Position(Vector3<f32>);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Component)]
+#[storage(VecStorage)]
 struct Rotation(Vector3<f32>);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Component)]
+#[storage(VecStorage)]
 struct Velocity(Vector3<f32>);
+struct SimpleIterSystem;
 
-pub struct Benchmark(World, Query<(Read<Velocity>, Write<Position>)>);
+impl<'a> System<'a> for SimpleIterSystem {
+    type SystemData = (WriteStorage<'a, Velocity>, WriteStorage<'a, Position>);
+
+    fn run(&mut self, (mut velocity_storage, mut position_storage): Self::SystemData) {
+        for (velocity, position) in (&mut velocity_storage, &mut position_storage).join() {
+            position.0 += velocity.0;
+        }
+    }
+}
+pub struct Benchmark(World, SimpleIterSystem);
 
 impl Benchmark {
     pub fn new() -> Self {
-        let mut world = World::default();
+        let mut world = World::new();
+        world.register::<Transform>();
+        world.register::<Position>();
+        world.register::<Rotation>();
+        world.register::<Velocity>();
+        (0..10000).for_each(|_| {
+            world
+                .create_entity()
+                .with(Transform(Matrix4::<f32>::from_angle_x(Rad(1.2))))
+                .with(Position(Vector3::unit_x()))
+                .with(Rotation(Vector3::unit_x()))
+                .with(Velocity(Vector3::unit_x()))
+                .build();
+        });
 
-        world.extend(
-            (
-                vec![Transform(Matrix4::from_scale(1.0)); 10000],
-                vec![Position(Vector3::unit_x()); 10000],
-                vec![Rotation(Vector3::unit_x()); 10000],
-                vec![Velocity(Vector3::unit_x()); 10000],
-            )
-                .into_soa(),
-        );
-        world.pack(PackOptions::force());
-
-        let query = <(Read<Velocity>, Write<Position>)>::query();
-
-        Self(world, query)
+        Self(world, SimpleIterSystem)
     }
 
     pub fn run(&mut self) {
-        self.1.for_each_mut(&mut self.0, |(velocity, position)| {
-            position.0 += velocity.0;
-        });
+        self.1.run_now(&self.0);
     }
 }

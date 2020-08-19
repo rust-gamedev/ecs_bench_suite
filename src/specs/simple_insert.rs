@@ -1,16 +1,20 @@
 use cgmath::*;
-use legion::*;
+use specs::prelude::*;
+use specs_derive::*;
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Component)]
+#[storage(VecStorage)]
 struct Transform(Matrix4<f32>);
-
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Component)]
+#[storage(VecStorage)]
 struct Position(Vector3<f32>);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Component)]
+#[storage(VecStorage)]
 struct Rotation(Vector3<f32>);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Component)]
+#[storage(VecStorage)]
 struct Velocity(Vector3<f32>);
 
 pub struct Benchmark;
@@ -21,16 +25,19 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        let mut world = World::default();
-
-        world.extend(
-            (
-                vec![Transform(Matrix4::from_scale(1.0)); 10000],
-                vec![Position(Vector3::unit_x()); 10000],
-                vec![Rotation(Vector3::unit_x()); 10000],
-                vec![Velocity(Vector3::unit_x()); 10000],
-            )
-                .into_soa(),
-        );
+        let mut world = World::new();
+        world.register::<Transform>();
+        world.register::<Position>();
+        world.register::<Rotation>();
+        world.register::<Velocity>();
+        (0..10000).for_each(|_| {
+            world
+                .create_entity()
+                .with(Transform(Matrix4::<f32>::from_scale(1.0)))
+                .with(Position(Vector3::unit_x()))
+                .with(Rotation(Vector3::unit_x()))
+                .with(Velocity(Vector3::unit_x()))
+                .build();
+        });
     }
 }
