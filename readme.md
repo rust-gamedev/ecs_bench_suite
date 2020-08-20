@@ -7,7 +7,7 @@ The full benchmark report is available [here](https://tomgillen.github.io/ecs_be
 |                  | legion (\*)         | legion 0.2.4 | bevy     | hecs    | shipyard (\*)         | specs       |
 |------------------|:-------------------:|:------------:|:--------:|:-------:|:---------------------:|:-----------:|
 | simple_insert    | **0.434ms**         | 1.06ms       | 0.865ms  | 0.645ms | 2.49ms                | 2.32ms      |
-| simple_iter      | **13.4us** (16.6us) | **13.4us**   | *14.4us* | 26.7us  | 110us (45.6ms)        | 34.3ms      |
+| simple_iter      | **13.4us** (16.6us) | **13.4us**   | *14.4us* | 26.7us  | 110us (45.6us)        | 34.3ms      |
 | frag_iter        | **0.509us**         | 1.78us       | 1.76us   | 1.79us  | 1.04us                | 1.67us      |
 | heavy_compute    | *0.701ms* (0.723ms) | 4.34ms       | 1.06ms   | 1.02ms  | 0.778ms (**0.700ms**) | 0.995ms     |
 | schedule         | **52.3us** (53.7us) | 151us        | 94.9us   | -       | 580us (307us)         | 244us       |
