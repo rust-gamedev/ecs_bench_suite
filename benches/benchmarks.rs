@@ -23,6 +23,10 @@ fn bench_simple_insert(c: &mut Criterion) {
         let mut bench = shipyard::simple_insert::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("specs", |b| {
+        let mut bench = specs::simple_insert::Benchmark::new();
+        b.iter(move || bench.run());
+    });
 }
 
 fn bench_simple_iter(c: &mut Criterion) {
@@ -55,6 +59,10 @@ fn bench_simple_iter(c: &mut Criterion) {
         let mut bench = shipyard_packed::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("specs", |b| {
+        let mut bench = specs::simple_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
 }
 
 fn bench_frag_iter_bc(c: &mut Criterion) {
@@ -77,6 +85,10 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
     });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::frag_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("specs", |b| {
+        let mut bench = specs::frag_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
 }
@@ -105,6 +117,10 @@ fn bench_schedule(c: &mut Criterion) {
     });
     group.bench_function("shipyard (packed)", |b| {
         let mut bench = shipyard_packed::schedule::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("specs", |b| {
+        let mut bench = specs::schedule::Benchmark::new();
         b.iter(move || bench.run());
     });
 }
@@ -139,6 +155,10 @@ fn bench_heavy_compute(c: &mut Criterion) {
         let mut bench = shipyard_packed::heavy_compute::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("specs", |b| {
+        let mut bench = specs::heavy_compute::Benchmark::new();
+        b.iter(move || bench.run());
+    });
 }
 
 fn bench_add_remove(c: &mut Criterion) {
@@ -157,6 +177,10 @@ fn bench_add_remove(c: &mut Criterion) {
     });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::add_remove::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("specs", |b| {
+        let mut bench = specs::add_remove::Benchmark::new();
         b.iter(move || bench.run());
     });
 
