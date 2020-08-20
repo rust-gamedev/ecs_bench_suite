@@ -27,6 +27,10 @@ fn bench_simple_iter(c: &mut Criterion) {
         let mut bench = legion::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("legion (packed)", |b| {
+        let mut bench = legion_packed::simple_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
     group.bench_function("legion_0.2.4", |b| {
         let mut bench = legion_2_4::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
@@ -37,6 +41,10 @@ fn bench_simple_iter(c: &mut Criterion) {
     });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::simple_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("shipyard (packed)", |b| {
+        let mut bench = shipyard_packed::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
 }
@@ -67,6 +75,10 @@ fn bench_schedule(c: &mut Criterion) {
         let mut bench = legion::schedule::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("legion (packed)", |b| {
+        let mut bench = legion_packed::schedule::Benchmark::new();
+        b.iter(move || bench.run());
+    });
     group.bench_function("legion_0.2.4", |b| {
         let mut bench = legion_2_4::schedule::Benchmark::new();
         b.iter(move || bench.run());
@@ -79,12 +91,20 @@ fn bench_schedule(c: &mut Criterion) {
         let mut bench = shipyard::schedule::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("shipyard (packed)", |b| {
+        let mut bench = shipyard_packed::schedule::Benchmark::new();
+        b.iter(move || bench.run());
+    });
 }
 
 fn bench_heavy_compute(c: &mut Criterion) {
     let mut group = c.benchmark_group("heavy_compute");
     group.bench_function("legion", |b| {
         let mut bench = legion::heavy_compute::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("legion (packed)", |b| {
+        let mut bench = legion_packed::heavy_compute::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("legion_0.2.4", |b| {
@@ -97,6 +117,10 @@ fn bench_heavy_compute(c: &mut Criterion) {
     });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::heavy_compute::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("shipyard (packed)", |b| {
+        let mut bench = shipyard_packed::heavy_compute::Benchmark::new();
         b.iter(move || bench.run());
     });
 }
