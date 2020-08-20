@@ -15,6 +15,10 @@ fn bench_simple_insert(c: &mut Criterion) {
         let mut bench = bevy::simple_insert::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("hecs", |b| {
+        let mut bench = hecs::simple_insert::Benchmark::new();
+        b.iter(move || bench.run());
+    });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::simple_insert::Benchmark::new();
         b.iter(move || bench.run());
@@ -39,6 +43,10 @@ fn bench_simple_iter(c: &mut Criterion) {
         let mut bench = bevy::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("hecs", |b| {
+        let mut bench = hecs::simple_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
@@ -61,6 +69,10 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
     });
     group.bench_function("bevy", |b| {
         let mut bench = bevy::frag_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("hecs", |b| {
+        let mut bench = hecs::frag_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("shipyard", |b| {
@@ -115,6 +127,10 @@ fn bench_heavy_compute(c: &mut Criterion) {
         let mut bench = bevy::heavy_compute::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("hecs", |b| {
+        let mut bench = hecs::heavy_compute::Benchmark::new();
+        b.iter(move || bench.run());
+    });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::heavy_compute::Benchmark::new();
         b.iter(move || bench.run());
@@ -133,6 +149,10 @@ fn bench_add_remove(c: &mut Criterion) {
     });
     group.bench_function("legion_0.2.4", |b| {
         let mut bench = legion_2_4::add_remove::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("hecs", |b| {
+        let mut bench = hecs::add_remove::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("shipyard", |b| {
