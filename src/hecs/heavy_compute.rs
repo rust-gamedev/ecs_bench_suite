@@ -1,5 +1,6 @@
 use cgmath::*;
 use hecs::*;
+use rayon::prelude::*;
 
 #[derive(Copy, Clone)]
 struct Position(Vector3<f32>);
@@ -29,12 +30,18 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        for (_, (mut pos, mat)) in self.0.query::<(&mut Position, &mut Matrix4<f32>)>().iter() {
-            for _ in 0..100 {
-                *mat = mat.invert().unwrap();
-            }
+        self.0
+            .query::<(&mut Position, &mut Matrix4<f32>)>()
+            .iter_batched(64)
+            .par_bridge()
+            .for_each(|batch| {
+                for (_, (mut pos, mat)) in batch {
+                    for _ in 0..100 {
+                        *mat = mat.invert().unwrap();
+                    }
 
-            pos.0 = mat.transform_vector(pos.0);
-        }
+                    pos.0 = mat.transform_vector(pos.0);
+                }
+            });
     }
 }
