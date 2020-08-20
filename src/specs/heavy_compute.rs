@@ -1,6 +1,8 @@
 use cgmath::*;
-use specs::prelude::*;
+use rayon::prelude::*;
+use specs::{prelude::*, ParJoin};
 use specs_derive::*;
+
 #[derive(Copy, Clone, Component)]
 #[storage(VecStorage)]
 struct Transform(Matrix4<f32>);
@@ -23,12 +25,14 @@ impl<'a> System<'a> for HeavyComputeSystem {
 
     fn run(&mut self, (mut pos_store, mut mat_store): Self::SystemData) {
         use cgmath::Transform;
-        for (pos, mat) in (&mut pos_store, &mut mat_store).join() {
-            for _ in 0..100 {
-                mat.0 = mat.0.invert().unwrap();
-            }
-            pos.0 = mat.0.transform_vector(pos.0);
-        }
+        (&mut pos_store, &mut mat_store)
+            .par_join()
+            .for_each(|(pos, mat)| {
+                for _ in 0..100 {
+                    mat.0 = mat.0.invert().unwrap();
+                }
+                pos.0 = mat.0.transform_vector(pos.0);
+            });
     }
 }
 
