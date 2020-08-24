@@ -4,20 +4,20 @@ A suite of benchmarks designed to test and compare Rust ECS library performance 
 
 The full benchmark report is available [here](https://rust-gamedev.github.io/ecs_bench_suite/target/criterion/report/index.html).
 
-|                  | legion (\*)         | legion 0.2.4 | bevy     | hecs    | shipyard (\*)         | specs       |
-|------------------|:-------------------:|:------------:|:--------:|:-------:|:---------------------:|:-----------:|
-| simple_insert    | **0.434ms**         | 1.06ms       | 0.865ms  | 0.645ms | 2.49ms                | 2.32ms      |
-| simple_iter      | **13.4us** (16.6us) | **13.4us**   | *14.4us* | 26.7us  | 110us (45.6us)        | 34.3ms      |
-| frag_iter        | **0.509us**         | 1.78us       | 1.76us   | 1.79us  | 1.04us                | 1.67us      |
-| heavy_compute    | *0.701ms* (0.723ms) | 4.34ms       | 1.06ms   | 1.02ms  | 0.778ms (**0.700ms**) | 0.995ms     |
-| schedule         | **52.3us** (53.7us) | 151us        | 94.9us   | -       | 580us (307us)         | 244us       |
-| add_remove       | 5.50ms              | 3.07ms       | -        | 18.2ms  | 2.90ms                | **0.148ms** |
-| serialize_text   | **17.9ms**          | -            | -        | -       | -                     | -           |
-| serialize_binary | **6.42ms**          | -            | -        | -       | -                     | -           |
+|                  | legion (\*)           | legion 0.2.4 | bevy       | hecs    | shipyard (\*)         | specs       |
+|------------------|:---------------------:|:------------:|:----------:|:-------:|:---------------------:|:-----------:|
+| simple_insert    | **0.434ms**           | 1.06ms       | 0.865ms    | 0.645ms | 2.49ms                | 2.32ms      |
+| simple_iter      | **13.4us** (16.6us)   | **13.4us**   | **14.4us** | 26.7us  | 110us (45.6us)        | 34.3ms      |
+| frag_iter        | **0.509us**           | 1.78us       | 1.76us     | 1.79us  | 1.04us                | 1.67us      |
+| heavy_compute    | **0.701ms** (0.723ms) | 4.34ms       | 1.06ms     | 1.02ms  | 0.778ms (**0.700ms**) | 0.995ms     |
+| schedule         | **52.3us** (53.7us)   | 151us        | 94.9us     | -       | 580us (307us)         | 244us       |
+| add_remove       | 5.50ms                | 3.07ms       | -          | 18.2ms  | 2.90ms                | **0.148ms** |
+| serialize_text   | **17.9ms**            | -            | -          | -       | -                     | -           |
+| serialize_binary | **6.42ms**            | -            | -          | -       | -                     | -           |
 
-(*): Per-benchmark storage optimizations. Some of these are mutually exclusive, so with and without "packing" typically represent best and worst-case performance for the ECS.
+(*): The values in parentheses are results where per-benchmark storage optimizations were applied. Some of these are mutually exclusive, so with and without "packing" typically represent best and worst-case performance for the ECS.
 
-Note: Run to run variance for these benchmarks is typically 2-3%, with outliers as much as 10%. All micro-benchmarks should be taken with a grain of salt, and any benchmarks within a few percent of each other should be considered "effectively equal".
+The best result for each benchmark is marked in bold text. Note that run to run variance for these benchmarks is typically 2-3%, with outliers as much as 10%. All micro-benchmarks should be taken with a grain of salt, and any benchmarks within a few percent of each other should be considered "effectively equal".
 
 ## The Benchmarks
 
