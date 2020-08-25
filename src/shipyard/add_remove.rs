@@ -22,16 +22,16 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        for entity in &self.1 {
-            self.0.run(|entities: EntitiesViewMut, mut b: ViewMut<B>| {
+        self.0.run(|entities: EntitiesViewMut, mut b: ViewMut<B>| {
+            for entity in &self.1 {
                 entities.add_component(&mut b, B(0.0), *entity);
-            });
-        }
+            }
+        });
 
-        for entity in &self.1 {
-            self.0.run(|mut b: ViewMut<B>| {
+        self.0.run(|mut b: ViewMut<B>| {
+            for entity in &self.1 {
                 b.remove(*entity);
-            });
-        }
+            }
+        });
     }
 }

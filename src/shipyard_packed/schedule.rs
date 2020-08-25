@@ -7,21 +7,21 @@ struct D(f32);
 struct E(f32);
 
 fn ab(mut a: ViewMut<A>, mut b: ViewMut<B>) {
-    for (a, b) in (&mut a, &mut b).iter() {
+    (&mut a, &mut b).iter().for_each(|(a, b)| {
         std::mem::swap(&mut a.0, &mut b.0);
-    }
+    })
 }
 
 fn cd(mut c: ViewMut<C>, mut d: ViewMut<D>) {
-    for (c, d) in (&mut c, &mut d).iter() {
+    (&mut c, &mut d).iter().for_each(|(c, d)| {
         std::mem::swap(&mut c.0, &mut d.0);
-    }
+    })
 }
 
 fn ce(mut c: ViewMut<C>, mut e: ViewMut<E>) {
-    for (c, e) in (&mut c, &mut e).iter() {
+    (&mut c, &mut e).iter().for_each(|(c, e)| {
         std::mem::swap(&mut c.0, &mut e.0);
-    }
+    })
 }
 
 pub struct Benchmark(World);
@@ -31,12 +31,15 @@ impl Benchmark {
         let world = World::default();
 
         world.run(
-            |mut a: ViewMut<A>, mut b: ViewMut<B>, mut c: ViewMut<C>, mut d: ViewMut<D>| {
+            |mut a: ViewMut<A>,
+             mut b: ViewMut<B>,
+             mut c: ViewMut<C>,
+             mut d: ViewMut<D>,
+             mut e: ViewMut<E>| {
                 (&mut a, &mut b).tight_pack();
                 (&mut c, &mut d).tight_pack();
 
-                // following pack is mutually exclusive with (c, d)
-                //(&mut c, &mut e).tight_pack();
+                (&mut e, &mut c).loose_pack();
             },
         );
 
