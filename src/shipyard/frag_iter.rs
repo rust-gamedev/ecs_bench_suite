@@ -34,9 +34,9 @@ impl Benchmark {
 
     pub fn run(&mut self) {
         self.0.run(|mut data: ViewMut<Data>| {
-            for data in (&mut data).iter() {
+            (&mut data).iter().for_each(|data| {
                 data.0 *= 2.0;
-            }
+            })
         });
     }
 }
