@@ -7,10 +7,6 @@ fn bench_simple_insert(c: &mut Criterion) {
         let mut bench = legion::simple_insert::Benchmark::new();
         b.iter(move || bench.run());
     });
-    group.bench_function("legion_0.2.4", |b| {
-        let mut bench = legion_2_4::simple_insert::Benchmark::new();
-        b.iter(move || bench.run());
-    });
     group.bench_function("bevy", |b| {
         let mut bench = bevy::simple_insert::Benchmark::new();
         b.iter(move || bench.run());
@@ -37,10 +33,6 @@ fn bench_simple_iter(c: &mut Criterion) {
     });
     group.bench_function("legion (packed)", |b| {
         let mut bench = legion_packed::simple_iter::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-    group.bench_function("legion_0.2.4", |b| {
-        let mut bench = legion_2_4::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("bevy", |b| {
@@ -71,10 +63,6 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
         let mut bench = legion::frag_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
-    group.bench_function("legion_0.2.4", |b| {
-        let mut bench = legion_2_4::frag_iter::Benchmark::new();
-        b.iter(move || bench.run());
-    });
     group.bench_function("bevy", |b| {
         let mut bench = bevy::frag_iter::Benchmark::new();
         b.iter(move || bench.run());
@@ -101,10 +89,6 @@ fn bench_schedule(c: &mut Criterion) {
     });
     group.bench_function("legion (packed)", |b| {
         let mut bench = legion_packed::schedule::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-    group.bench_function("legion_0.2.4", |b| {
-        let mut bench = legion_2_4::schedule::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("bevy", |b| {
@@ -135,10 +119,6 @@ fn bench_heavy_compute(c: &mut Criterion) {
         let mut bench = legion_packed::heavy_compute::Benchmark::new();
         b.iter(move || bench.run());
     });
-    group.bench_function("legion_0.2.4", |b| {
-        let mut bench = legion_2_4::heavy_compute::Benchmark::new();
-        b.iter(move || bench.run());
-    });
     group.bench_function("bevy", |b| {
         let mut bench = bevy::heavy_compute::Benchmark::new();
         b.iter(move || bench.run());
@@ -165,10 +145,6 @@ fn bench_add_remove(c: &mut Criterion) {
     let mut group = c.benchmark_group("add_remove_component");
     group.bench_function("legion", |b| {
         let mut bench = legion::add_remove::Benchmark::new();
-        b.iter(move || bench.run());
-    });
-    group.bench_function("legion_0.2.4", |b| {
-        let mut bench = legion_2_4::add_remove::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("hecs", |b| {
