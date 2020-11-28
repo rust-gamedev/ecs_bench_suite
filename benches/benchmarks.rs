@@ -159,12 +159,10 @@ fn bench_add_remove(c: &mut Criterion) {
         let mut bench = specs::add_remove::Benchmark::new();
         b.iter(move || bench.run());
     });
-
-    // todo Bevy appears to crash in this benchmark
-    // group.bench_function("bevy", |b| {
-    //     let mut bench = bevy::add_remove::Benchmark::new();
-    //     b.iter(move || bench.run());
-    // });
+    group.bench_function("bevy", |b| {
+        let mut bench = bevy::add_remove::Benchmark::new();
+        b.iter(move || bench.run());
+    });
 }
 
 fn bench_serialize_text(c: &mut Criterion) {

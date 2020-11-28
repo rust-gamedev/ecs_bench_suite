@@ -31,8 +31,7 @@ impl Benchmark {
 
     pub fn run(&mut self) {
         self.0
-            .query::<(&mut Position, &mut Matrix4<f32>)>()
-            .iter_batched(64)
+            .query_batched_mut::<(&mut Position, &mut Matrix4<f32>)>(64)
             .par_bridge()
             .for_each(|batch| {
                 for (mut pos, mut mat) in batch {
