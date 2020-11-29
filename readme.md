@@ -4,16 +4,16 @@ A suite of benchmarks designed to test and compare Rust ECS library performance 
 
 The full benchmark report is available [here](https://rust-gamedev.github.io/ecs_bench_suite/target/criterion/report/index.html).
 
-|                  | legion (\*)           | bevy       | hecs    | shipyard (\*)         | specs       |
-|------------------|:----------------------|:----------:|:-------:|:---------------------:|:-----------:|
-| simple_insert    | **0.434ms**           | 0.865ms    | 0.645ms | 2.49ms                | 2.32ms      |
-| simple_iter      | **13.4us** (16.6us)   | **14.4us** | 26.7us  | 110us (45.6us)        | 34.3ms      |
-| frag_iter        | **0.509us**           | 1.76us     | 1.79us  | 1.04us                | 1.67us      |
-| heavy_compute    | **0.701ms** (0.723ms) | 1.06ms     | 1.02ms  | 0.778ms (**0.700ms**) | 0.995ms     |
-| schedule         | **52.3us** (53.7us)   | 94.9us     | -       | 580us (307us)         | 244us       |
-| add_remove       | 5.50ms                | -          | 18.2ms  | 2.90ms                | **0.148ms** |
-| serialize_text   | **17.9ms**            | -          | -       | -                     | -           |
-| serialize_binary | **6.42ms**            | -          | -       | -                     | -           |
+|                  | legion (\*)           | bevy       | hecs       | shipyard (\*)         | specs       |
+|------------------|:----------------------|:----------:|:----------:|:---------------------:|:-----------:|
+| simple_insert    | **383μs**             | 636μs      | 640μs      | 2.08ms                | 1.90ms      |
+| simple_iter      | 13.2μs (**11.2μs**)   | 12.9μs     | **12.0μs** | 86.3μs (24.2μs)       | 28.8ms      |
+| frag_iter        | 441ns                 | 554ns      | 452ns      | **121ns**             | 1.41μs      |
+| heavy_compute    | **686μs** (687μs)     | 958μs      | 972μs      | **693μs** (693μs)     | 968μs       |
+| schedule         | **54.3μs** (53.7μs)   | 80.3μs     | -          | 372μs (132μs)         | 155μs       |
+| add_remove       | 4.45ms                | 6.71ms     | 7.86ms     | 237μs                 | **123μs**   |
+| serialize_text   | **12.5ms**            | -          | -          | -                     | -           |
+| serialize_binary | **6.50ms**            | -          | -          | -                     | -           |
 
 (*): The values in parentheses are results where per-benchmark storage optimizations were applied. Some of these are mutually exclusive, so with and without "packing" typically represent best and worst-case performance for the ECS.
 
