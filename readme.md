@@ -19,6 +19,13 @@ The full benchmark report is available [here](https://rust-gamedev.github.io/ecs
 
 The best result for each benchmark is marked in bold text. Note that run to run variance for these benchmarks is typically 2-3%, with outliers as much as 10%. All micro-benchmarks should be taken with a grain of salt, and any benchmarks within a few percent of each other should be considered "effectively equal".
 
+[](./target/criterion/add_remove_component/report/violin.svg)
+[](./target/criterion/fragmented_iter/report/violin.svg)
+[](./target/criterion/heavy_compute/report/violin.svg)
+[](./target/criterion/schedule/report/violin.svg)
+[](./target/criterion/simple_insert/report/violin.svg)
+[](./target/criterion/simple_iter/report/violin.svg)
+
 ## The Benchmarks
 
 ### Simple Insert
