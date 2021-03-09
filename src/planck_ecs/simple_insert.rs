@@ -23,12 +23,19 @@ impl Benchmark {
         let mut comp2 = Components::<Position>::default();
         let mut comp3 = Components::<Rotation>::default();
         let mut comp4 = Components::<Velocity>::default();
-        (0..10000).for_each(|_| {
+
+        let en = (0..10000).map(|_| entities.create()).collect::<Vec<_>>();
+        en.iter().for_each(|e| {comp1.insert(*e, Transform(Matrix4::<f32>::from_scale(1.0)));});
+        en.iter().for_each(|e| {comp2.insert(*e, Position(Vector3::unit_x()));});
+        en.iter().for_each(|e| {comp3.insert(*e, Rotation(Vector3::unit_x()));});
+        en.iter().for_each(|e| {comp4.insert(*e, Velocity(Vector3::unit_x()));});
+
+        /*(0..10000).for_each(|_| {
             let e = entities.create();
             comp1.insert(e, Transform(Matrix4::<f32>::from_scale(1.0)));
             comp2.insert(e, Position(Vector3::unit_x()));
             comp3.insert(e, Rotation(Vector3::unit_x()));
             comp4.insert(e, Velocity(Vector3::unit_x()));
-        });
+        });*/
     }
 }
