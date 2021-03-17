@@ -4,21 +4,6 @@ A suite of benchmarks designed to test and compare Rust ECS library performance 
 
 The full benchmark report is available [here](https://rust-gamedev.github.io/ecs_bench_suite/target/criterion/report/index.html).
 
-|                  | legion (\*)           | bevy       | hecs       | shipyard (\*)         | specs       |
-|------------------|:----------------------|:----------:|:----------:|:---------------------:|:-----------:|
-| simple_insert    | **383μs**             | 636μs      | 640μs      | 2.08ms                | 1.90ms      |
-| simple_iter      | 13.2μs (**11.2μs**)   | 12.9μs     | **12.0μs** | 86.3μs (24.2μs)       | 28.8ms      |
-| frag_iter        | 441ns                 | 554ns      | 452ns      | **121ns**             | 1.41μs      |
-| heavy_compute    | **686μs** (687μs)     | 958μs      | 972μs      | **693μs** (693μs)     | 968μs       |
-| schedule         | **54.3μs** (53.7μs)   | 80.3μs     | -          | 372μs (132μs)         | 155μs       |
-| add_remove       | 4.45ms                | 6.71ms     | 7.86ms     | 237μs                 | **123μs**   |
-| serialize_text   | **12.5ms**            | -          | -          | -                     | -           |
-| serialize_binary | **6.50ms**            | -          | -          | -                     | -           |
-
-(*): The values in parentheses are results where per-benchmark storage optimizations were applied. Some of these are mutually exclusive, so with and without "packing" typically represent best and worst-case performance for the ECS.
-
-The best result for each benchmark is marked in bold text. Note that run to run variance for these benchmarks is typically 2-3%, with outliers as much as 10%. All micro-benchmarks should be taken with a grain of salt, and any benchmarks within a few percent of each other should be considered "effectively equal".
-
 ![](./target/criterion/add_remove_component/report/violin.svg)
 ![](./target/criterion/fragmented_iter/report/violin.svg)
 ![](./target/criterion/heavy_compute/report/violin.svg)
