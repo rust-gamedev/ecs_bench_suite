@@ -15,6 +15,10 @@ fn bench_simple_insert(c: &mut Criterion) {
         let mut bench = hecs::simple_insert::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("planck_ecs", |b| {
+        let mut bench = planck_ecs::simple_insert::Benchmark::new();
+        b.iter(move || bench.run());
+    });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::simple_insert::Benchmark::new();
         b.iter(move || bench.run());
@@ -41,6 +45,10 @@ fn bench_simple_iter(c: &mut Criterion) {
     });
     group.bench_function("hecs", |b| {
         let mut bench = hecs::simple_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("planck_ecs", |b| {
+        let mut bench = planck_ecs::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("shipyard", |b| {
@@ -71,6 +79,10 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
         let mut bench = hecs::frag_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("planck_ecs", |b| {
+        let mut bench = planck_ecs::frag_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
     group.bench_function("shipyard", |b| {
         let mut bench = shipyard::frag_iter::Benchmark::new();
         b.iter(move || bench.run());
@@ -93,6 +105,10 @@ fn bench_schedule(c: &mut Criterion) {
     });
     group.bench_function("bevy", |b| {
         let mut bench = bevy::schedule::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("planck_ecs", |b| {
+        let mut bench = planck_ecs::schedule::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("shipyard", |b| {
@@ -149,6 +165,10 @@ fn bench_add_remove(c: &mut Criterion) {
     });
     group.bench_function("hecs", |b| {
         let mut bench = hecs::add_remove::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("planck_ecs", |b| {
+        let mut bench = planck_ecs::add_remove::Benchmark::new();
         b.iter(move || bench.run());
     });
     group.bench_function("shipyard", |b| {
