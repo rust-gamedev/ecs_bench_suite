@@ -59,9 +59,9 @@ Three systems accessing the following components mutably, where each system swap
 
 This benchmark is designed to test the ECS's ability to scale when it is allowed to run a system over multiple CPU cores. This is primarily an inner-parallelism test.
 
-Dataset: 10,000 entities with a `mat4x4` component.
+Dataset: 1,000 entities with a `mat4x4` component.
 
-Test: Iterate through all `mat4x4` components, and invert the matrix 10 times.
+Test: Iterate through all `mat4x4` components, and invert the matrix 100 times.
 
 ![](./target/criterion/heavy_compute/report/violin.svg)
 
@@ -69,7 +69,7 @@ Test: Iterate through all `mat4x4` components, and invert the matrix 10 times.
 
 This benchmark is designed to test how quickly the ECS can add and then remove a component from an existing entity.
 
-Dataset: 1,000 entities with a single `A` component.
+Dataset: 10,000 entities with a single `A` component.
 
 Test: Iterate through all entities, adding a `B` component. Then iterate through all entities again, removing their `B` component.
 
