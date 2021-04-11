@@ -82,3 +82,6 @@ This benchmark is designed to test how quickly the ECS and serialize and deseria
 Dataset: 1000 entities with `Transform(mat4x4)`, `Position(vec3)`, `Rotation(vec3)` and `Velocity(vec3)` components.
 
 Test: Serialize all entities to RON and bincode formats in-memory. Then deserialize back into the ECS. The RON and bincode formats should be separate benchmark tests.
+
+![](./target/criterion/serialize_text/report/violin.svg)
+![](./target/criterion/serialize_binary/report/violin.svg)
