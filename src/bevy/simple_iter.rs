@@ -31,7 +31,9 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        for (velocity, mut position) in self.0.query_mut::<(&Velocity, &mut Position)>() {
+        let mut query = self.0.query::<(&Velocity, &mut Position)>();
+
+        for (velocity, mut position) in query.iter_mut(&mut self.0) {
             position.0 += velocity.0;
         }
     }

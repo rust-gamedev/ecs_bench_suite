@@ -1,6 +1,6 @@
 use bevy_ecs::prelude::*;
+use bevy_tasks::TaskPool;
 use cgmath::*;
-use rayon::prelude::*;
 
 #[derive(Copy, Clone)]
 struct Position(Vector3<f32>);
@@ -30,17 +30,15 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        self.0
-            .query_batched_mut::<(&mut Position, &mut Matrix4<f32>)>(64)
-            .par_bridge()
-            .for_each(|batch| {
-                for (mut pos, mut mat) in batch {
-                    for _ in 0..100 {
-                        *mat = mat.invert().unwrap();
-                    }
+        let task_pool = TaskPool::new();
+        let mut query = self.0.query::<(&mut Position, &mut Matrix4<f32>)>();
 
-                    pos.0 = mat.transform_vector(pos.0);
-                }
-            });
+        query.par_for_each_mut(&mut self.0, &task_pool, 64, |(mut pos, mut mat)| {
+            for _ in 0..100 {
+                *mat = mat.invert().unwrap();
+            }
+
+            pos.0 = mat.transform_vector(pos.0);
+        });
     }
 }
