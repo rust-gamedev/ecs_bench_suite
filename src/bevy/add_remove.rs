@@ -18,11 +18,11 @@ impl Benchmark {
 
     pub fn run(&mut self) {
         for entity in &self.1 {
-            self.0.insert_one(*entity, B(0.0)).unwrap();
+            self.0.entity_mut(*entity).insert(B(0.0));
         }
 
         for entity in &self.1 {
-            self.0.remove_one::<B>(*entity).unwrap();
+            self.0.entity_mut(*entity).remove::<B>();
         }
     }
 }
