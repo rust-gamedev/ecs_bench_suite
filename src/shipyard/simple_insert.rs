@@ -46,6 +46,6 @@ impl Benchmark {
                     );
                 }
             },
-        );
+        ).unwrap();
     }
 }

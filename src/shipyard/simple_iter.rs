@@ -42,7 +42,7 @@ impl Benchmark {
                     );
                 }
             },
-        );
+        ).unwrap();
 
         Self(world)
     }
@@ -52,10 +52,10 @@ impl Benchmark {
             |velocities: View<Velocity>, mut positions: ViewMut<Position>| {
                 (&velocities, &mut positions)
                     .iter()
-                    .for_each(|(velocity, position)| {
+                    .for_each(|(velocity, mut position)| {
                         position.0 += velocity.0;
                     })
             },
-        );
+        ).unwrap();
     }
 }

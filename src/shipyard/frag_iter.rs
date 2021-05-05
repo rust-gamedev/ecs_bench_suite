@@ -14,7 +14,7 @@ macro_rules! create_entities {
                         ($variants(0.0), Data(1.0)),
                     );
                 }
-            });
+            }).unwrap();
         )*
     };
 }
@@ -34,9 +34,9 @@ impl Benchmark {
 
     pub fn run(&mut self) {
         self.0.run(|mut data: ViewMut<Data>| {
-            (&mut data).iter().for_each(|data| {
+            (&mut data).iter().for_each(|mut data| {
                 data.0 *= 2.0;
             })
-        });
+        }).unwrap();
     }
 }
