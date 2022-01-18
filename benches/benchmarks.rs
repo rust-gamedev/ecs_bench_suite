@@ -27,6 +27,10 @@ fn bench_simple_insert(c: &mut Criterion) {
         let mut bench = specs::simple_insert::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("edict", |b| {
+        let mut bench = edict::simple_insert::Benchmark::new();
+        b.iter(move || bench.run());
+    });
 }
 
 fn bench_simple_iter(c: &mut Criterion) {
@@ -59,6 +63,10 @@ fn bench_simple_iter(c: &mut Criterion) {
         let mut bench = specs::simple_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
+    group.bench_function("edict", |b| {
+        let mut bench = edict::simple_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
 }
 
 fn bench_frag_iter_bc(c: &mut Criterion) {
@@ -85,6 +93,10 @@ fn bench_frag_iter_bc(c: &mut Criterion) {
     });
     group.bench_function("specs", |b| {
         let mut bench = specs::frag_iter::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("edict", |b| {
+        let mut bench = edict::frag_iter::Benchmark::new();
         b.iter(move || bench.run());
     });
 }
@@ -169,6 +181,10 @@ fn bench_add_remove(c: &mut Criterion) {
     });
     group.bench_function("bevy", |b| {
         let mut bench = bevy::add_remove::Benchmark::new();
+        b.iter(move || bench.run());
+    });
+    group.bench_function("edict", |b| {
+        let mut bench = edict::add_remove::Benchmark::new();
         b.iter(move || bench.run());
     });
 }

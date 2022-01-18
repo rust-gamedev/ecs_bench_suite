@@ -20,6 +20,7 @@ serde = { version = "1.0", features = ["derive"] }
 shipyard = "0.5.0"
 specs = {version = "0.16.1", features = ["serde"] }
 specs-derive = "0.4.1"
+edict = { version = "0.0.3" }
 
 [dev-dependencies]
 criterion = "0.3"
