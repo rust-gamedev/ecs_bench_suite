@@ -10,7 +10,7 @@ edition = "2018"
 bevy_ecs = "0.5.0"
 bevy_tasks = "0.5.0"
 bincode = "1.3"
-brood = {path = "../brood", features = ["rayon", "serde"]}
+brood = { version = "0.1.0", features = ["rayon", "serde"] }
 cgmath = { version = "0.17", features = ["serde"] }
 hecs = { version = "0.5", features = ["column-serialize", "row-serialize"] }
 legion = "0.3"
