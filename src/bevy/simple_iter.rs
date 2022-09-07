@@ -1,16 +1,16 @@
 use bevy_ecs::prelude::*;
 use cgmath::*;
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, bevy_ecs::component::Component)]
 struct Transform(Matrix4<f32>);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, bevy_ecs::component::Component)]
 struct Position(Vector3<f32>);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, bevy_ecs::component::Component)]
 struct Rotation(Vector3<f32>);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, bevy_ecs::component::Component)]
 struct Velocity(Vector3<f32>);
 
 pub struct Benchmark(World);

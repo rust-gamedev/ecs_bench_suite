@@ -52,7 +52,10 @@ impl Benchmark {
 
     pub fn run(&mut self) {
         let Self(world, registry) = self;
-        let serializable = &world.as_serializable(any(), &*registry);
+
+        let mut canon = legion::serialize::Canon::default();
+
+        let serializable = &world.as_serializable(any(), &*registry, &mut canon);
 
         let encoded = bincode::serialize(serializable).unwrap();
 
@@ -65,7 +68,7 @@ impl Benchmark {
         );
 
         registry
-            .as_deserialize()
+            .as_deserialize(&mut canon)
             .deserialize(&mut deserializer)
             .unwrap();
     }

@@ -7,18 +7,18 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy_ecs = "0.5.0"
-bevy_tasks = "0.5.0"
+bevy_ecs = "0.8.0"
+bevy_tasks = "0.8.0"
 bincode = "1.3"
-cgmath = { version = "0.17", features = ["serde"] }
-hecs = { version = "0.5", features = ["column-serialize", "row-serialize"] }
-legion = "0.3"
+cgmath = { version = "0.18", features = ["serde"] }
+hecs = { version = "0.7", features = ["column-serialize", "row-serialize"] }
+legion = "0.4"
 planck_ecs = { version = "1.1.0", features = ["parallel"] }
 rayon = "1.3"
-ron = "0.6"
+ron = "0.8"
 serde = { version = "1.0", features = ["derive"] }
-shipyard = "0.5.0"
-specs = {version = "0.16.1", features = ["serde"] }
+shipyard = "0.6.0"
+specs = {version = "0.18", features = ["serde"] }
 specs-derive = "0.4.1"
 
 [dev-dependencies]
