@@ -104,7 +104,7 @@ impl Benchmark {
         serialize(
             &world,
             &mut SerContext,
-            &mut ron::Serializer::new(&mut encoded, None, false).unwrap(),
+            &mut ron::Serializer::new(&mut encoded, None).unwrap(),
         )
         .unwrap();
         deserialize(
