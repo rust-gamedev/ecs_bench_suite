@@ -23,7 +23,7 @@ impl Benchmark {
     }
 
     pub fn run(&mut self) {
-        for (_, mut data) in self.0.query::<&mut Data>().iter() {
+        for (_, mut data) in self.0.query_mut::<&mut Data>() {
             data.0 *= 2.0;
         }
     }

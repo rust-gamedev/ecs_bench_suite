@@ -39,13 +39,13 @@ impl SerializeContext for SerContext {
     fn serialize_entity<S: SerializeMap>(
         &mut self,
         entity: EntityRef<'_>,
-        map: &mut S,
-    ) -> Result<(), S::Error> {
-        try_serialize::<Transform, _, _>(&entity, &ComponentId::Transform, map)?;
-        try_serialize::<Position, _, _>(&entity, &ComponentId::Position, map)?;
-        try_serialize::<Rotation, _, _>(&entity, &ComponentId::Rotation, map)?;
-        try_serialize::<Velocity, _, _>(&entity, &ComponentId::Velocity, map)?;
-        Ok(())
+        mut map: S,
+    ) -> Result<S::Ok, S::Error> {
+        try_serialize::<Transform, _, _>(&entity, &ComponentId::Transform, &mut map)?;
+        try_serialize::<Position, _, _>(&entity, &ComponentId::Position, &mut map)?;
+        try_serialize::<Rotation, _, _>(&entity, &ComponentId::Rotation, &mut map)?;
+        try_serialize::<Velocity, _, _>(&entity, &ComponentId::Velocity, &mut map)?;
+        map.end()
     }
 }
 
