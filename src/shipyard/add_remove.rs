@@ -1,6 +1,9 @@
 use shipyard::*;
 
+#[derive(Component)]
 struct A(f32);
+
+#[derive(Component)]
 struct B(f32);
 
 pub struct Benchmark(World, Vec<EntityId>);
@@ -16,7 +19,7 @@ impl Benchmark {
                 entity_ids.push(entity);
             }
             entity_ids
-        }).unwrap();
+        });
 
         Self(world, entities)
     }
@@ -26,12 +29,12 @@ impl Benchmark {
             for entity in &self.1 {
                 entities.add_component(*entity, &mut b, B(0.0));
             }
-        }).unwrap();
+        });
 
         self.0.run(|mut b: ViewMut<B>| {
             for entity in &self.1 {
                 b.remove(*entity);
             }
-        }).unwrap();
+        });
     }
 }

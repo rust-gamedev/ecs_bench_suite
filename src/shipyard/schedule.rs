@@ -1,25 +1,34 @@
 use shipyard::*;
 
+#[derive(Component)]
 struct A(f32);
+
+#[derive(Component)]
 struct B(f32);
+
+#[derive(Component)]
 struct C(f32);
+
+#[derive(Component)]
 struct D(f32);
+
+#[derive(Component)]
 struct E(f32);
 
 fn ab(mut a: ViewMut<A>, mut b: ViewMut<B>) {
-    (&mut a, &mut b).iter().for_each(|(mut a, mut b)| {
+    (&mut a, &mut b).iter().for_each(|(a, b)| {
         std::mem::swap(&mut a.0, &mut b.0);
     })
 }
 
 fn cd(mut c: ViewMut<C>, mut d: ViewMut<D>) {
-    (&mut c, &mut d).iter().for_each(|(mut c, mut d)| {
+    (&mut c, &mut d).iter().for_each(|(c, d)| {
         std::mem::swap(&mut c.0, &mut d.0);
     })
 }
 
 fn ce(mut c: ViewMut<C>, mut e: ViewMut<E>) {
-    (&mut c, &mut e).iter().for_each(|(mut c, mut e)| {
+    (&mut c, &mut e).iter().for_each(|(c, e)| {
         std::mem::swap(&mut c.0, &mut e.0);
     })
 }
@@ -36,7 +45,7 @@ impl Benchmark {
                     entities.add_entity((&mut a, &mut b), (A(0.0), B(0.0)));
                 }
             },
-        ).unwrap();
+        );
 
         world.run(
             |mut entities: EntitiesViewMut,
@@ -47,7 +56,7 @@ impl Benchmark {
                     entities.add_entity((&mut a, &mut b, &mut c), (A(0.0), B(0.0), C(0.0)));
                 }
             },
-        ).unwrap();
+        );
 
         world.run(
             |mut entities: EntitiesViewMut,
@@ -62,7 +71,7 @@ impl Benchmark {
                     );
                 }
             },
-        ).unwrap();
+        );
 
         world.run(
             |mut entities: EntitiesViewMut,
@@ -77,9 +86,9 @@ impl Benchmark {
                     );
                 }
             },
-        ).unwrap();
+        );
 
-        Workload::builder("run")
+        Workload::new("run")
             .with_system(&ab)
             .with_system(&cd)
             .with_system(&ce)

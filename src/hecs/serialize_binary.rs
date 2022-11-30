@@ -52,8 +52,8 @@ impl SerializeContext for SerContext {
     fn serialize_component_ids<S: SerializeTuple>(
         &mut self,
         archetype: &Archetype,
-        out: &mut S,
-    ) -> Result<(), S::Error> {
+        mut out: S,
+    ) -> Result<S::Ok, S::Error> {
         if archetype.has::<Transform>() {
             out.serialize_element(&ComponentId::Transform)?;
         }
@@ -66,19 +66,19 @@ impl SerializeContext for SerContext {
         if archetype.has::<Velocity>() {
             out.serialize_element(&ComponentId::Velocity)?;
         }
-        Ok(())
+        out.end()
     }
 
     fn serialize_components<S: SerializeTuple>(
         &mut self,
         archetype: &Archetype,
-        out: &mut S,
-    ) -> Result<(), S::Error> {
-        try_serialize::<Transform, _>(archetype, out)?;
-        try_serialize::<Position, _>(archetype, out)?;
-        try_serialize::<Rotation, _>(archetype, out)?;
-        try_serialize::<Velocity, _>(archetype, out)?;
-        Ok(())
+        mut out: S,
+    ) -> Result<S::Ok, S::Error> {
+        try_serialize::<Transform, _>(archetype, &mut out)?;
+        try_serialize::<Position, _>(archetype, &mut out)?;
+        try_serialize::<Rotation, _>(archetype, &mut out)?;
+        try_serialize::<Velocity, _>(archetype, &mut out)?;
+        out.end()
     }
 }
 
